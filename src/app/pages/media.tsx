@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-// Define a TypeScript interface for the movie object
 interface Movie {
   original_title: string;
   release_date: string;
@@ -12,14 +11,30 @@ interface Movie {
 
 const MoviePage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const getMovie = () => {
+    setIsLoading(true);
+    setError(null);
+
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch movies");
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data && data.results) {
           setMovies(data.results);
         }
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
