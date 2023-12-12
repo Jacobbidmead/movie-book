@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
@@ -51,19 +51,38 @@ const MoviePage = () => {
     fetchMovies("");
   }, []);
 
-  const handleSearch = () => {
-    fetchMovies(searchQuery);
+  const debounce = <F extends (...args: any[]) => any>(
+    func: F,
+    delay: number
+  ): ((...args: Parameters<F>) => void) => {
+    let timer: NodeJS.Timeout;
+    return function (...args: Parameters<F>) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
   };
+
+  // Using useCallback with correct type annotations
+  const handleSearchChange = useCallback(
+    debounce((query: string) => {
+      fetchMovies(query);
+    }, 500),
+    [fetchMovies]
+  );
 
   return (
     <div>
       <input
         type="text"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+          handleSearchChange(e.target.value);
+        }}
         placeholder="Search for a movie..."
       />
-      <button onClick={handleSearch}>Search</button>
 
       {movies.map((movie, i) => (
         <div key={i}>
