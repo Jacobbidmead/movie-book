@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import Search from "../components/search";
 
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
@@ -15,9 +16,8 @@ const MoviePage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const fetchMovies = (query: string) => {
+  const fetchMovies = (query: string = "") => {
     setIsLoading(true);
     setError(null);
 
@@ -46,43 +46,9 @@ const MoviePage = () => {
         setIsLoading(false);
       });
   };
-
-  useEffect(() => {
-    fetchMovies("");
-  }, []);
-
-  const debounce = <F extends (...args: any[]) => any>(
-    func: F,
-    delay: number
-  ): ((...args: Parameters<F>) => void) => {
-    let timer: NodeJS.Timeout;
-    return function (...args: Parameters<F>) {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
-
-  // Using useCallback with a debounce delay
-  const handleSearchChange = useCallback(
-    debounce((query: string) => {
-      fetchMovies(query);
-    }, 1000), // Adjust the delay as needed
-    [fetchMovies]
-  );
-
   return (
     <div>
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => {
-          setSearchQuery(e.target.value);
-          handleSearchChange(e.target.value);
-        }}
-        placeholder="Search for a movie..."
-      />
+      <Search onSearch={fetchMovies} />
 
       {movies.map((movie, i) => (
         <div key={i}>
