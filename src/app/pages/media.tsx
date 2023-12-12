@@ -1,5 +1,7 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
+
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 interface Movie {
@@ -13,12 +15,19 @@ const MoviePage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const getMovie = () => {
+  const fetchMovies = (query: string) => {
     setIsLoading(true);
     setError(null);
 
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`)
+    const url = query
+      ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+          query
+        )}`
+      : `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+
+    fetch(url)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch movies");
@@ -39,11 +48,23 @@ const MoviePage = () => {
   };
 
   useEffect(() => {
-    getMovie();
+    fetchMovies("");
   }, []);
+
+  const handleSearch = () => {
+    fetchMovies(searchQuery);
+  };
 
   return (
     <div>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search for a movie..."
+      />
+      <button onClick={handleSearch}>Search</button>
+
       {movies.map((movie, i) => (
         <div key={i}>
           <h2>{movie.original_title}</h2>
