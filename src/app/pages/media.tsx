@@ -64,11 +64,11 @@ const MoviePage = () => {
     };
   };
 
-  // Using useCallback with correct type annotations
+  // Using useCallback with a debounce delay
   const handleSearchChange = useCallback(
     debounce((query: string) => {
       fetchMovies(query);
-    }, 500),
+    }, 1000), // Adjust the delay as needed
     [fetchMovies]
   );
 
