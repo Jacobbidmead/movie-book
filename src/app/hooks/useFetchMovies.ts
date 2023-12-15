@@ -19,11 +19,9 @@ export const useFetchMovies = () => {
     setIsLoading(true);
     setError(null);
 
-    const url = query
-      ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-          query
-        )}`
-      : `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+      query
+    )}`;
 
     fetch(url)
       .then((res) => {
