@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import Search from "../components/search";
 import { useFetchMovies } from "../hooks/useFetchMovies";
 
-const MoviePage = () => {
+const MoviePage: React.FC = () => {
   const { movies, isLoading, error, fetchMovies } = useFetchMovies();
   return (
     <div>
