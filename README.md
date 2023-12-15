@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+'Movie Book' app (beta name)
 
-## Getting Started
+Overview
+Movie Book App is designed to solve the indecisiveness often faced when choosing movies. Built with TypeScript and Next.js, it provides a robust, user-friendly interface powered by the App Router and styled using Tailwind CSS. The app integrates data from The Movie Database (TMDb) API, along with APIs from various streaming services, to offer a personalized movie selection experience.
 
-First, run the development server:
+Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Personalized Movie Search: Users can search for and add their favorite movies to their profile, using data sourced from TMDb API.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Integration with Streaming Services: The app will connect with multiple streaming service APIs, allowing users to view their liked or watchlisted films from these platforms in one place.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+AI-Powered Movie Matching: Utilizing AI, the app will compare user profiles with those of a friend or partner to suggest movies that suit both parties' preferences.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Mood-Based Suggestions: The app will take into account the current mood of users, offering movie recommendations that align with how they're feeling.
 
-## Learn More
+Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+TypeScript: Ensures type safety and enhances the development experience with static type checking.
+Next.js: Provides a framework for server-side rendering, improving SEO and performance.
+App Router: Manages routing in the Next.js environment, offering a seamless navigation experience.
+Tailwind CSS: Utilized for styling, offering a utility-first approach for a customizable and responsive design.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Getting Started
+To get started with the app, users need to create an account and input their movie preferences. This includes linking their streaming service accounts to import their liked films.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+How the AI Works
 
-## Deploy on Vercel
+The AI algorithm will compare the movie preferences and watch histories of two users to find commonalities and differences. It then analyses mood inputs to filter suggestions, ensuring the recommended movies align with both users' tastes and current emotional state.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Future Enhancements
+Broader API Integration: Plans to incorporate more streaming service APIs for a wider range of movie options.
+Advanced AI Features: Enhancing the AI to consider more nuanced user preferences and viewing habits.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
