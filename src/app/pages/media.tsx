@@ -3,18 +3,7 @@
 import React, { useState } from "react";
 import Search from "../components/search";
 import { useFetchMovies } from "../hooks/useFetchMovies";
-
-interface savedMovies {
-  saveMovie: string;
-}
-
-interface Movie {
-  original_title: string;
-  release_date: string;
-  vote_average: string;
-  id: string;
-  poster_path: string;
-}
+import { Movie } from "../types/interfaces";
 
 const MoviePage: React.FC = () => {
   const [savedMovie, setSavedMovie] = useState<Movie[]>([]);

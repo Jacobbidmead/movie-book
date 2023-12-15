@@ -1,14 +1,9 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { Movie } from "../types/interfaces";
 
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-
-interface Movie {
-  original_title: string;
-  release_date: string;
-  vote_average: string;
-}
 
 export const useFetchMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
