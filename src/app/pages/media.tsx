@@ -5,6 +5,7 @@ import Search from "../components/search";
 import { useFetchMovies } from "../hooks/useFetchMovies";
 import UserMedia from "../components/userMedia";
 import { Movie } from "../types/interfaces";
+import LoginPage from "./login.page";
 
 const MoviePage: React.FC = () => {
   const { movies, isLoading, error, fetchMovies } = useFetchMovies();
@@ -39,6 +40,7 @@ const MoviePage: React.FC = () => {
         </div>
       ))}
       <UserMedia savedMovies={savedMovies} />
+      <LoginPage />
     </div>
   );
 };
