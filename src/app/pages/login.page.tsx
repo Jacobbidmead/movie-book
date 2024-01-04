@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -11,7 +11,7 @@ const LoginPage: React.FC = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
     if (response.ok) {
@@ -26,16 +26,16 @@ const LoginPage: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
+        type="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="user name"
       />
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
+        placeholder="password"
       />
       <button type="submit">Login</button>
     </form>
