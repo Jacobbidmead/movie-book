@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 
 const LoginPage: React.FC = () => {
@@ -6,7 +8,7 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("/api/login", {
+    const response = await fetch("/app/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +28,6 @@ const LoginPage: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="user name"

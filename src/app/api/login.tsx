@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import dbConnect from "../app/lib/dbConnect";
-import User from "../app/models/User";
+import dbConnect from "../lib/dbConnect";
+import User from "../models/User";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   try {
     // Ensure database connection
-    await dbConnect(); // Call dbConnect here to establish the connection
+    await dbConnect();
 
     if (req.method !== "POST") {
       return res.status(405).json({ message: "Method not allowed" });
